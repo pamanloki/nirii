@@ -16,8 +16,10 @@ window-rule {
 
   draw-border-with-background false
 
+  // Blur dimatikan: dihitung ulang tiap frame saat konten di belakang
+  // berubah -> beban GPU konstan, terutama pas terminal output jalan terus.
   background-effect {
-    blur true
+    blur false
     // xray true
     // saturation 0
   }
@@ -66,10 +68,12 @@ window-rule {
   default-window-height { fixed 920; }
 }
 
-layer-rule {
- match namespace="awww-daemon"
- place-within-backdrop true
-}
+// place-within-backdrop dimatikan bareng blur: render wallpaper ke backdrop
+// cuma perlu kalau blur xray dipakai. Aktifkan lagi kalau blur dihidupkan.
+//layer-rule {
+// match namespace="awww-daemon"
+// place-within-backdrop true
+//}
 
 //layer-rule {
 //  match namespace="^noctalia-wallpaper*"
