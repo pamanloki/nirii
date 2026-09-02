@@ -5,7 +5,9 @@ animations {
         spring damping-ratio=0.80 stiffness=523 epsilon=0.0001
     }
     window-open {
-        duration-ms 1400
+        // 1400ms terlalu lama: pas kerja berat, GPU render custom shader
+        // per-pixel selama 1,4 detik tiap buka window -> berasa lemot.
+        duration-ms 300
         curve "ease-out-expo"
         custom-shader r"
             float ease_curve(float x) {
@@ -58,7 +60,9 @@ animations {
     }
 
     window-close {
-        duration-ms 1400
+        // Sama seperti window-open: dipangkas dari 1400ms biar tutup window
+        // nggak nahan GPU lama-lama saat beban tinggi.
+        duration-ms 300
         curve "ease-out-expo"
         custom-shader r"
             // ease-in-out cubic curve helper
